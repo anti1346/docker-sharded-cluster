@@ -20,9 +20,9 @@ services:
       - ./mongodb/data-config:/data/db
     network_mode: host
     extra_hosts:
-      - mongodb-201:${NODE1}
-      - mongodb-202:${NODE2}
-      - mongodb-203:${NODE3}
+      - node1:192.168.0.14
+      - node2:192.168.0.15
+      - node3:192.168.0.16
     expose:
       - 27018
 
@@ -43,9 +43,9 @@ services:
       - ./mongodb/data-mongo1:/data/db
     network_mode: host
     extra_hosts:
-      - mongodb-201:${NODE1}
-      - mongodb-202:${NODE2}
-      - mongodb-203:${NODE3}
+      - node1:192.168.0.14
+      - node2:192.168.0.15
+      - node3:192.168.0.16
     expose:
       - 27011
 
@@ -63,9 +63,9 @@ services:
       - ./mongodb/data-mongo2:/data/db
     network_mode: host
     extra_hosts:
-      - mongodb-201:${NODE1}
-      - mongodb-202:${NODE2}
-      - mongodb-203:${NODE3}
+      - node1:192.168.0.14
+      - node2:192.168.0.15
+      - node3:192.168.0.16
     expose:
       - 27012
 
@@ -80,14 +80,14 @@ services:
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
     #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-    command: mongos --configdb configserver/mongodb-201:27018,mongodb-202:27018,mongodb-203:27018 --keyFile /data/key/mongo.key --bind_ip_all --port 27017
+    command: mongos --configdb configserver/node1:27018,node2:27018,node3:27018 --keyFile /data/key/mongo.key --bind_ip_all --port 27017
     volumes:
       - ./mongodb/data-router:/data/db
     network_mode: host
     extra_hosts:
-      - mongodb-201:${NODE1}
-      - mongodb-202:${NODE2}
-      - mongodb-203:${NODE3}
+      - node1:192.168.0.14
+      - node2:192.168.0.15
+      - node3:192.168.0.16
     depends_on:
       - config
     expose:
