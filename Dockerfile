@@ -22,3 +22,4 @@ RUN chown -R mongodb:mongodb /data/key/mongo.key \
 
 ### docker build
 # docker build -t anti1346/mongo:5.0.8 .
+# docker push anti1346/mongo:5.0.8 .

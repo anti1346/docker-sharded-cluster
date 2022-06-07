@@ -3,7 +3,7 @@ services:
 
   ### config server(mongo)
   config:
-    image: anti1346/mongo:5.0.8
+    image: anti1346/mongo-arm:5.0.8
     container_name: config
     restart: always
     env_file:
@@ -30,7 +30,7 @@ services:
   ### Mongodb Servers
   ### replica set 1(shard)
   mongo1:
-    image: anti1346/mongo:5.0.8
+    image: anti1346/mongo-arm:5.0.8
     container_name: mongo1
     restart: unless-stopped
     env_file:
@@ -50,7 +50,7 @@ services:
       - 27011
 
   mongo2:
-    image: anti1346/mongo:5.0.8
+    image: anti1346/mongo-arm:5.0.8
     container_name: mongo2
     restart: unless-stopped
     env_file:
@@ -72,7 +72,7 @@ services:
 
   ### router(mongos)
   router:
-    image: anti1346/mongo:5.0.8
+    image: anti1346/mongo-arm:5.0.8
     container_name: router
     restart: unless-stopped
     env_file:
