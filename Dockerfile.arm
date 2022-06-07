@@ -21,4 +21,4 @@ RUN chown -R mongodb:mongodb /data/key/mongo.key \
   && chmod 400 /data/key/mongo.key
 
 ### docker build
-# docker build -f Dockerfile.arm -t -t anti1346/mongo-arm:5.0.8 .
+# docker buildx build -f Dockerfile.arm --platform linux/arm64/v8 -t anti1346/mongo-arm:5.0.8 .
