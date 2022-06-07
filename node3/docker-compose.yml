@@ -1,32 +1,6 @@
 version: '3.3'
 services:
 
-  ### config server(mongo)
-  config:
-    image: anti1346/mongo-arm:5.0.8
-    container_name: config
-    restart: always
-    env_file:
-      - ./../.env
-    # environment:
-    #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-    #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-    ulimits:
-      nofile:
-        soft: 300000
-        hard: 300000
-    command: mongod --configsvr --replSet configserver --keyFile /data/key/mongo.key --dbpath /data/db --bind_ip_all --port 27018
-    volumes:
-      - ./mongodb/data-config:/data/db
-    network_mode: host
-    extra_hosts:
-      - node1:192.168.0.14
-      - node2:192.168.0.15
-      - node3:192.168.0.16
-    expose:
-      - 27018
-
-
   ### Mongodb Servers
   ### replica set 1(shard)
   mongo1:
@@ -88,6 +62,32 @@ services:
       - node3:192.168.0.16
     expose:
       - 27013
+
+
+  ### config server(mongo)
+  config:
+    image: anti1346/mongo-arm:5.0.8
+    container_name: config
+    restart: always
+    env_file:
+      - ./../.env
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+    #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    ulimits:
+      nofile:
+        soft: 300000
+        hard: 300000
+    command: mongod --configsvr --replSet configserver --keyFile /data/key/mongo.key --dbpath /data/db --bind_ip_all --port 27018
+    volumes:
+      - ./mongodb/data-config:/data/db
+    network_mode: host
+    extra_hosts:
+      - node1:192.168.0.14
+      - node2:192.168.0.15
+      - node3:192.168.0.16
+    expose:
+      - 27018
 
 
   ### router(mongos)
